@@ -1,0 +1,126 @@
+:root{
+  --button-red: #F25022;
+  --button-blue: #00b4f1;
+  --button-green: #91c300;
+  --button-yellow: #ffc300;
+  --background: linear-gradient(100deg, #0078D7 0%, #003366 100%);
+  --transform-button: skewX(-10deg) rotate(-5deg);
+}
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--background);
+  color: #f9f9f9;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: transparent;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background: var(--background);
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+[data-theme= "dark"]{
+  --background: #1a1a1a;
+  color: #f9f9f9;
+  --transform-button: 0;
+}
+[data-theme= "pink"]{
+  --background: #FFB8E0;
+  color: #ce4492;
+  --transform-button: skewX(0deg) rotate(0deg);
+  --button-red: url('./assets/theme-pink/btn-red.jpeg');
+  --button-blue: url('./assets/theme-pink/btn-blue.jpeg');
+  --button-green: url('./assets/theme-pink/btn-green.jpeg');
+  --button-yellow: url('./assets/theme-pink/btn-yellow.jpeg');
+}
+[data-theme= "purple"]{
+  --background: #954ebe;
+  color: #4f1770;
+  --transform-button: 0;
+
+}
+.theme-options{
+  display: flex;
+  gap: 10px;
+}
+.theme-option{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid;
+}
+
+#theme-light {
+  background-color: #f9f9f9;
+  border-color: #1a1a1a;
+}
+#theme-dark {
+  background-color: #1a1a1a;
+  border-color: #f9f9f9;
+}
+#theme-pink{
+  background-color: #FFB8E0;
+  border-color: #954ebe;
+} 
+#theme-purple{
+  background-color: #954ebe;
+  border-color: #FFB8E0;
+}
+
+.GameBoard{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 20rem;
+  margin: 20px auto;
+  transform: var(--transform-button);
+  transition: transform 0.5s;
+}
+
+.color-button{
+  object-fit: cover;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+#btn-green{
+  background-color: var(--button-green);
+  background-image: var(--button-green);
+
+}
+#btn-red{
+  background-color: var(--button-red);
+  background-image: var(--button-red);
+}
+
+#btn-blue{
+  background-color: var(--button-blue);
+  background-image: var(--button-blue);
+}
+#btn-yellow{
+  background-color: var(--button-yellow);
+  background-image: var(--button-yellow);
+}
