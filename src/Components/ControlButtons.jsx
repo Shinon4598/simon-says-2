@@ -1,7 +1,7 @@
-function ControlButtons({gameOver}) {
+function ControlButtons({gameOver, resetGame}) {
   return (
     <div className="control-buttons">
-      {gameOver && <button onClick={() => window.location.reload()}>Play Again</button>}
+      {gameOver && <button onClick={() => resetGame()}>Play Again</button>}
     </div>
   )
     

@@ -29,7 +29,7 @@ export function App() {
           <ColorButton onClick={() => handleClick(button.id)} active={activeButton == button.id} key={button.id} color={button.color}/>
         ))}
       </GameBoard>
-      <ControlButtons gameOver={gameOver}></ControlButtons>
+      <ControlButtons resetGame={resetGame} gameOver={gameOver}></ControlButtons>
     </>
   )
 }

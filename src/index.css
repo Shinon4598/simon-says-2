@@ -3,8 +3,15 @@
   --button-blue: #00b4f1;
   --button-green: #91c300;
   --button-yellow: #ffc300;
+  --border-radius-red: 0;
+  --border-radius-blue:  0 ;
+  --border-radius-green: 0 ;
+  --border-radius-yellow: 0 ;
+  --border-red: 0px;
   --background: linear-gradient(100deg, #0078D7 0%, #003366 100%);
   --transform-button: skewX(-10deg) rotate(-5deg);
+  --button-width: 10rem;
+  --button-height: 10rem;
 }
 body {
   margin: 0;
@@ -41,6 +48,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #f9f9f9;
+    background: #1a1a1a;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
 [data-theme= "dark"]{
   --background: #1a1a1a;
   color: #f9f9f9;
@@ -54,11 +70,20 @@ button:focus-visible {
   --button-blue: url('./assets/theme-pink/btn-blue.jpeg');
   --button-green: url('./assets/theme-pink/btn-green.jpeg');
   --button-yellow: url('./assets/theme-pink/btn-yellow.jpeg');
+  --border-radius-red: 50% 0 0 0;
+  --border-radius-blue:  0 0 0 50%;
+  --border-radius-green: 0 50% 0 0;
+  --border-radius-yellow: 0 0 50% 0;
 }
 [data-theme= "purple"]{
   --background: #954ebe;
   color: #4f1770;
-  --transform-button: 0;
+  --transform-button: skewX(-5deg) rotate(0deg);
+
+  --button-red: url('./assets/theme-purple/btn-red.jpeg');
+  --button-blue: url('./assets/theme-purple/btn-blue.jpeg');
+  --button-green: url('./assets/theme-purple/btn-green.jpeg');
+  --button-yellow: url('./assets/theme-purple/btn-yellow.jpeg');
 
 }
 .theme-options{
@@ -105,22 +130,31 @@ button:focus-visible {
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
+  width: var(--button-width);
+  height: var(--button-height);
 }
 #btn-green{
   background-color: var(--button-green);
+  border-color: green;
   background-image: var(--button-green);
-
+  border-radius: var(--border-radius-green);
 }
 #btn-red{
   background-color: var(--button-red);
+  border-color: red;
   background-image: var(--button-red);
+  border-radius: var(--border-radius-red);
 }
 
 #btn-blue{
   background-color: var(--button-blue);
+  border-color: blue;
   background-image: var(--button-blue);
+  border-radius: var(--border-radius-blue);
 }
 #btn-yellow{
   background-color: var(--button-yellow);
+  border-color: yellow;
   background-image: var(--button-yellow);
+  border-radius: var(--border-radius-yellow);
 }

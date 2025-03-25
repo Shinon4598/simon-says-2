@@ -1,5 +1,5 @@
-import {useState, useEffect, useRef, useCallback, useReducer} from 'react';
-import {buttons, isSequenceCorrect, generateNextSequence} from '../utils/gameLogic';
+import {useEffect, useRef, useCallback, useReducer} from 'react';
+import {isSequenceCorrect, generateNextSequence, playSound} from '../utils/gameLogic';
 const initialState = {
   playerSequence: [],
   gameSequence: [],
@@ -44,6 +44,7 @@ export function useSimonSays() {
 
   //Manejar secuencia incorrecta
   const handleIncorrectSequence = useCallback(() => {
+    playSound(5);
     dispatch({type: 'SET_GAME_OVER'});
   }, []);
 
@@ -52,6 +53,7 @@ export function useSimonSays() {
     clearTimers();
     //Esperar antes de desactivar el boton activo
     timerRef.current = setTimeout(() => {
+      playSound(6);
       dispatch({type: 'SET_ACTIVE_BUTTON', payload: 0});
       //Agregar un nuevo color despues de un breve retraso
       timerRef.current = setTimeout(() => {
@@ -64,6 +66,9 @@ export function useSimonSays() {
   //Manejar click del jugador
   const handleClick = useCallback( (button) => {
     if (state.gameOver || !state.playerTurn) return;
+
+    //Reproducir el sonido del botón presionado
+    playSound(button);
 
     const newPlayerSequence = [...state.playerSequence, button];
     dispatch({type: 'SET_ACTIVE_BUTTON', payload: button});
@@ -99,6 +104,7 @@ export function useSimonSays() {
         dispatch({type: 'SET_ACTIVE_BUTTON', payload: 0});
 
         timerRef.current = setTimeout(() => {
+          playSound(sequence[index]);
           dispatch({type: 'SET_ACTIVE_BUTTON', payload: sequence[index]});
           index++;
           timerRef.current = setTimeout(() => { 
@@ -129,14 +135,17 @@ export function useSimonSays() {
   }, [state.gameSequence]);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      addColorToSequence();
-    }, 500);
-    return () => {
-      clearTimers();
-    };
+    if (!state.gameOver) {
+      timerRef.current = setTimeout(() => {
+        addColorToSequence();
+      }, 500);
+      return () => {
+        clearTimers();
+      };
+    }
+    
   }
-  , []);
+  , [state.gameOver]);
   
   return { gameOver: state.gameOver, playerTurn: state.playerTurn, activeButton: state.activeButton, resetGame, handleClick };
 }

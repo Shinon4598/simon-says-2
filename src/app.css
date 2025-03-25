@@ -13,7 +13,6 @@
 .color-button{
   transition: all 0.2s ease;
   cursor: pointer;
-  height: 10rem;
   filter: brightness(0.8);
 }
 .color-button:focus{
