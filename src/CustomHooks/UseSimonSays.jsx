@@ -67,9 +67,6 @@ export function useSimonSays() {
   const handleClick = useCallback( (button) => {
     if (state.gameOver || !state.playerTurn) return;
 
-    //Reproducir el sonido del botón presionado
-    playSound(button);
-
     const newPlayerSequence = [...state.playerSequence, button];
     dispatch({type: 'SET_ACTIVE_BUTTON', payload: button});
 
@@ -83,6 +80,9 @@ export function useSimonSays() {
       handleIncorrectSequence();
       return;
     }
+    //Reproducir el sonido del botón presionado
+    playSound(button);
+    
     
     // Agregar el botón presionado a la secuencia del jugador
     dispatch({type: 'SET_PLAYER_SEQUENCE', payload: newPlayerSequence});
@@ -147,5 +147,5 @@ export function useSimonSays() {
   }
   , [state.gameOver]);
   
-  return { gameOver: state.gameOver, playerTurn: state.playerTurn, activeButton: state.activeButton, resetGame, handleClick };
+  return { gameOver: state.gameOver, playerTurn: state.playerTurn, round:state.gameSequence.length, activeButton: state.activeButton, resetGame, handleClick };
 }

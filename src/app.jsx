@@ -5,6 +5,7 @@ import './app.css';
 import { useSimonSays } from './CustomHooks/UseSimonSays';
 import ControlButtons from './Components/ControlButtons';
 import ThemeOption from './Components/ThemeOption';
+import Score from './Components/Score';
 
 const buttons = [
   {id:1, color:"red"}, 
@@ -14,7 +15,7 @@ const buttons = [
 ];
 
 export function App() {
-  const {playerTurn, activeButton, gameOver, resetGame, handleClick} = useSimonSays();
+  const {playerTurn, activeButton, gameOver, round, resetGame, handleClick} = useSimonSays();
   return (
     <>
       <Header gameOver={gameOver} turn = {playerTurn}></Header>
@@ -29,6 +30,7 @@ export function App() {
           <ColorButton onClick={() => handleClick(button.id)} active={activeButton == button.id} key={button.id} color={button.color}/>
         ))}
       </GameBoard>
+      <Score score={round}/>
       <ControlButtons resetGame={resetGame} gameOver={gameOver}></ControlButtons>
     </>
   )
