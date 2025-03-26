@@ -6,13 +6,8 @@ import { useSimonSays } from './CustomHooks/UseSimonSays';
 import ControlButtons from './Components/ControlButtons';
 import ThemeOption from './Components/ThemeOption';
 import Score from './Components/Score';
+import {buttons} from './utils/gameLogic';
 
-const buttons = [
-  {id:1, color:"red"}, 
-  {id:2, color:"green"}, 
-  {id:3, color:"blue"}, 
-  {id:4, color:"yellow"}
-];
 
 export function App() {
   const {playerTurn, activeButton, gameOver, round, resetGame, handleClick} = useSimonSays();

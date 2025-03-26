@@ -1,9 +1,21 @@
-import redSound from '../assets/sounds/red.mp3';
-import greenSound from '../assets/sounds/green.mp3';
-import blueSound from '../assets/sounds/blue.mp3';
-import yellowSound from '../assets/sounds/yellow.mp3';
-import wrongSound from '../assets/sounds/wrong.mp3';
-import winSound from '../assets/sounds/win.mp3';
+import light_red from '../assets/theme-light/red.mp3';
+import light_green from '../assets/theme-light/green.mp3';
+import light_blue from '../assets/theme-light/blue.mp3';
+import light_yellow from '../assets/theme-light/yellow.mp3';
+import wrong from '../assets/wrong.mp3';
+import win from '../assets/win.mp3';
+import pink_red from '../assets/theme-pink/red.mp3';
+import pink_green from '../assets/theme-pink/green.mp3';
+import pink_blue from '../assets/theme-pink/blue.mp3';
+import pink_yellow from '../assets/theme-pink/yellow.mp3';
+import dark_red from '../assets/theme-dark/red.mp3';
+import dark_green from '../assets/theme-dark/green.mp3';
+import dark_blue from '../assets/theme-dark/blue.mp3';
+import dark_yellow from '../assets/theme-dark/yellow.mp3';
+import purple_red from '../assets/theme-purple/red.mp3';
+import purple_green from '../assets/theme-purple/green.mp3';
+import purple_blue from '../assets/theme-purple/blue.mp3';
+import purple_yellow from '../assets/theme-purple/yellow.mp3';
 
 
 export const buttons = [
@@ -24,18 +36,48 @@ export function generateNextSequence() {
 }
 
 const sounds = {
-  1: redSound,
-  2: greenSound,
-  3: blueSound,
-  4: yellowSound,
-  5: wrongSound,
-  6: winSound
+  "light":{
+    1: light_red,
+    2: light_green,
+    3: light_blue,
+    4: light_yellow,
+    5: wrong,
+    6: win
+  },
+  "pink": {
+    1: pink_red,
+    2: pink_green,
+    3: pink_blue,
+    4: pink_yellow,
+    5: wrong,
+    6: win
+  },
+  "dark": {
+    1: dark_red,
+    2: dark_green,
+    3: dark_blue,
+    4: dark_yellow,
+    5: wrong,
+    6: win
+  },
+  "purple": {
+    1: purple_red,
+    2: purple_green,
+    3: purple_blue,
+    4: purple_yellow,
+    5: wrong,
+    6: win
+  }
 };
 
 
 let audio = null;
 export function playSound(id) {
-    if (!sounds[id]) {
+    let theme = localStorage.getItem('theme');
+    if (!theme) {
+        theme = 'light';
+    }
+    if (!sounds[theme] || !sounds[theme][id]) {
         console.error(`No sound found for ID: ${id}`);
         return;
     }
@@ -44,7 +86,7 @@ export function playSound(id) {
         audio.pause();
         audio.currentTime = 0;
     }
-    audio = new Audio(sounds[id]);
+    audio = new Audio(sounds[theme][id]);
     audio.playbackRate = 1.5;
     audio.play().catch((error) => {
         console.error("Error playing sound:", error);

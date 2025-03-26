@@ -10,9 +10,31 @@
   --border-red: 0px;
   --background: linear-gradient(100deg, #0078D7 0%, #003366 100%);
   --transform-button: skewX(-10deg) rotate(-5deg);
-  --button-width: 10rem;
-  --button-height: 10rem;
 }
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+.card {
+  padding: 2em;
+}
+
+.color-button{
+  transition: all 0.2s ease;
+  cursor: pointer;
+  filter: brightness(0.8);
+}
+.color-button:focus{
+  outline: none;
+
+}
+.active{
+  scale: 0.9;
+  filter: brightness(1);
+  border: 4px solid white;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -22,7 +44,9 @@ body {
   background: var(--background);
   color: #f9f9f9;
 }
-
+#app{
+  padding: 0%;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -87,6 +111,9 @@ button:focus-visible {
 
 }
 .theme-options{
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: flex;
   gap: 10px;
 }
@@ -98,6 +125,61 @@ button:focus-visible {
   border: 1px solid;
 }
 
+.game-over{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  width: 70vh;
+  text-align: center;
+  background-color: #584b9f;
+  border-radius: 20px;
+}
+.game-over h2{
+  font-size: 5em;
+  color: white;
+  margin: 0;
+}
+.game-over p{
+  font-size: 1.5em;
+  color: #eb960e;
+}
+.game-over_buttons
+{
+  display: flex;
+  gap: 10px;
+}
+
+.game-over_buttons .restart, .game-over_buttons .exit{
+  display: inline-block;
+  font-size: 2.5rem;
+  font-family: 'Comic Sans MS', sans-serif;
+  border-radius: 4em;
+  padding: 10px 20px;
+  margin: 0.25em;
+  color: #eb960e;
+  height: 5rem;
+  width: 10rem;
+  cursor: pointer;
+  border: #eb960e solid 5px;
+}
+.game-over_buttons .restart, .game-over_buttons .exit:hover{
+  background-color: transparent;
+  color: #eb960e;
+}
+
+.game-over_buttons .restart:hover, .game-over_buttons .exit{
+  background-color: #eb960e;
+  color: #584b9f;
+}
+.game-over_buttons .restart:focus{
+  outline: none;
+}
 #theme-light {
   background-color: #f9f9f9;
   border-color: #1a1a1a;
@@ -119,7 +201,8 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
-  width: 20rem;
+  width: 100%;
+  max-width: 400px;
   margin: 20px auto;
   transform: var(--transform-button);
   transition: transform 0.5s;
@@ -130,8 +213,10 @@ button:focus-visible {
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
-  width: var(--button-width);
-  height: var(--button-height);
+  width: 100%;
+  aspect-ratio: 1;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 #btn-green{
   background-color: var(--button-green);
@@ -157,4 +242,32 @@ button:focus-visible {
   border-color: yellow;
   background-image: var(--button-yellow);
   border-radius: var(--border-radius-yellow);
+}
+@media screen and (max-width: 480px) {
+  .GameBoard{
+    width: 100%;
+    max-width: none;
+  }
+  .color-button{
+    grid-gap: 5px;
+  }
+  .game-over{
+    height: 90vh;
+    width: 100vw;
+  }
+  .game-over h2{
+    font-size: 3em;
+  }
+  .game-over p{
+    font-size: 1em;
+  }
+  .game-over_buttons{
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 320px) {
+  #app{
+    margin-left: 20px;
+  }
+  
 }
